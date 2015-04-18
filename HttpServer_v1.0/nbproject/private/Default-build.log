@@ -1,0 +1,8 @@
+(cd src; make all)
+/usr/bin/g++ -g -O2 -std=c++11 -Wall -D_REENTRANT -I../include -I/include    -c -o Add.o Add.cpp
+/usr/bin/g++ -g -O2 -std=c++11 -Wall -D_REENTRANT -I../include -I/include    -c -o Main.o Main.cpp
+/usr/bin/g++ -o ../bin/Binary  Add.o  Main.o /lib/libboost_thread.a /lib/libboost_system.a -lpthread
+clang: error: no such file or directory: '/lib/libboost_thread.a'
+clang: error: no such file or directory: '/lib/libboost_system.a'
+make[1]: *** [../bin/Binary] Error 1
+make: *** [all] Error 2
