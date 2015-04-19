@@ -9,11 +9,17 @@
       </df>
       <df name="include">
         <in>Add.hpp</in>
+        <in>HttpClientConnManager.hpp</in>
+        <in>HttpClientConnection.hpp</in>
+        <in>HttpServer.hpp</in>
       </df>
       <df name="lib">
       </df>
       <df name="src">
         <in>Add.cpp</in>
+        <in>HttpClientConnManager.cpp</in>
+        <in>HttpClientConnection.cpp</in>
+        <in>HttpServer.cpp</in>
         <in>Main.cpp</in>
       </df>
     </df>

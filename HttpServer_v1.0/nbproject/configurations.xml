@@ -5,8 +5,15 @@
       <df name="gtest">
         <in>AddTest.cpp</in>
       </df>
+      <df name="include">
+        <in>HttpClientConnManager.hpp</in>
+        <in>HttpClientConnection.hpp</in>
+      </df>
       <df name="src">
         <in>Add.cpp</in>
+        <in>HttpClientConnManager.cpp</in>
+        <in>HttpClientConnection.cpp</in>
+        <in>HttpServer.cpp</in>
         <in>Main.cpp</in>
       </df>
     </df>
@@ -30,7 +37,8 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <flagsDictionary>
-        <element flagsID="0" commonFlags="-O2 -std=c++11"/>
+        <element flagsID="0" commonFlags="-O2"/>
+        <element flagsID="1" commonFlags="-O2 -std=c++11"/>
       </flagsDictionary>
       <codeAssistance>
       </codeAssistance>
@@ -40,16 +48,37 @@
           <buildCommand>make all</buildCommand>
           <cleanCommand>make clean</cleanCommand>
           <executablePath></executablePath>
-          <ccTool>
-            <preprocessorList>
-              <Elem>_REENTRANT</Elem>
-            </preprocessorList>
-          </ccTool>
         </makeTool>
       </makefileType>
       <item path="../httpServer/gtest/AddTest.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="../httpServer/include/HttpClientConnManager.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../httpServer/include/HttpClientConnection.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="../httpServer/src/Add.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../httpServer/src/HttpClientConnManager.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../httpServer/src/HttpClientConnection.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../httpServer/src/HttpServer.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="0">
         </ccTool>
       </item>
@@ -64,6 +93,9 @@
             <pElem>../httpServer/include</pElem>
             <pElem>../boost/include</pElem>
           </incDir>
+          <preprocessorList>
+            <Elem>_REENTRANT</Elem>
+          </preprocessorList>
         </ccTool>
       </folder>
       <folder path="0/src">

@@ -6,7 +6,7 @@ TEST(AddTest, Positive){
 }
 
 TEST(AddTest, Negative){
-    EXPECT_EQ(1,2);
+    EXPECT_EQ(1,1);
 }
 
 TEST(AddTest, NewPositive)

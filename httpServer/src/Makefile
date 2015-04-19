@@ -8,10 +8,10 @@ SHARED_LIB=../lib/libAdd.so
 
 ##ARCH = $(shell uname -m)	# ARCH becomes the output from the uname -m command.
 CXX=/usr/bin/g++
-CXXFLAGS=-g -O2 -std=c++11 -Wall -D_REENTRANT $(INCS)
+CXXFLAGS=-g -O2 -Wall $(INCS)
 
 SRCS = Add.cpp
-MAIN_SRC = Main.cpp
+MAIN_SRC = Main.cpp HttpServer.cpp HttpClientConnManager.cpp HttpClientConnection.cpp
 
 OBJS = $(patsubst %.cpp, %.o, $(SRCS))
 MAIN_OBJ = $(patsubst %.cpp, %.o, $(MAIN_SRC))
