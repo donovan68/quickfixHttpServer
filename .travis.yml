@@ -27,7 +27,6 @@ before_script:
 - pwd
 - cd httpServer
 - pwd
-- mkdir bin lib
 - which sh
 
 script: make createlib ; make all
