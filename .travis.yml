@@ -16,7 +16,6 @@ before_install:
 - sudo apt-get install libgtest-dev
 - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
 - sudo apt-get install libboost-thread-dev libboost-system-dev
-- sudo ls -lrt /usr/local/lib | grep -i libboost
 
 install:
 #- sudo apt-get install -qq gcc-4.8 g++-4.8
