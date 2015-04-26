@@ -27,6 +27,7 @@ before_script:
 - pwd
 - cd httpServer
 - pwd
+- if [ ! -d lib ] then mkdir -m 755 lib ; fi
 - which sh
 
 script: make createlib ; make all
