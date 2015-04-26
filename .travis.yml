@@ -7,12 +7,16 @@
 #
 language: cpp
 compiler:
-- gcc
-#- clang
+#- gcc
+- clang
 
 before_install:
 #- sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-#- sudo apt-get update -qq
+- sudo apt-get update
+- sudo apt-get install libgtest-dev
+- "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
+- sudo apt-get install libboost-thread-dev libboost-system-dev
+
 install:
 #- sudo apt-get install -qq gcc-4.8 g++-4.8
 #- sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
@@ -20,10 +24,23 @@ install:
 script: httpServer/make
 # need to install the Boost libraries to the sandbox
 before_script:
-- sudo apt-get update -qq
-- sudo apt-get install libboost-thread-dev libboost-system-dev
+- pwd
+- cd httpServer
+- pwd
+- which sh
+
+script: make
+
+branches:
+only:
+- master
+
 notifications:
+recipients:
+- ankithbti007@gmail.com
 email:
-recipients: ankithbti007@gmail.com
 on_success: change
 on_failure: always
+
+rvm:
+#- 9.00
