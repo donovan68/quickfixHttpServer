@@ -29,7 +29,7 @@ $(BIN): $(OBJS) $(MAIN_OBJ)
 	$(CXX) -o $(BIN) $(OBJS) $(MAIN_OBJ) $(LIBS)
 
 $(STATIC_LIB): $(OBJS)
-	ar -rv $(STATIC_LIB) $(OBJS)
+	/usr/bin/ar -rv $(STATIC_LIB) $(OBJS)
 
 $(SHARED_LIB): $(OBJS)
 	$(CXX) -shared $^ -o $@
