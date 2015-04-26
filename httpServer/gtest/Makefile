@@ -7,7 +7,7 @@ GTEST_LIB = ../lib/libgtest.a
 
 ##ARCH = $(shell uname -m)	# ARCH becomes the output from the uname -m command.
 CXX=/usr/bin/g++
-CXXFLAGS=-g -O2 -std=c++11 -Wall -I$(GTEST_ROOT)/include -D_REENTRANT $(INCS)
+CXXFLAGS=-g -O2 -Wall -I$(GTEST_ROOT)/include -D_REENTRANT $(INCS)
 
 SRCS = AddTest.cpp
 
@@ -23,10 +23,10 @@ $(GTEST_LIB): $(GTEST_OBJ)
 	ar -rv $(GTEST_LIB) $(GTEST_OBJ)
 
 LIBS = \
-    	$(BOOST_INSTALL_ROOT)/lib/libboost_thread.a \
-	$(BOOST_INSTALL_ROOT)/lib/libboost_system.a \
+    	-lboost_thread-mt \
+	-lboost_system-mt \
 	-L../lib -lAdd \
-        $(GTEST_ROOT)/make/gtest_main.a \
+        -lgtest_main \
 	-lpthread
 
 	
