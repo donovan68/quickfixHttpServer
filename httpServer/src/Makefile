@@ -21,6 +21,8 @@ INCS = -I../include \
        -I$(BOOST_INSTALL_ROOT)/include \
 
 LIBS = \
+        -lboost_thread-mt \
+        -lboost_system-mt \
 	-lpthread
 	
 $(BIN): $(OBJS) $(MAIN_OBJ)
