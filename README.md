@@ -1,2 +1,2 @@
 Build Status
-> [![Build Status](https://travis-ci.org/easylogging/easyloggingpp.png?branch=develop)](https://travis-ci.org/easylogging/easyloggingpp)
+> [![Build Status](https://travis-ci.org/ankithbti/newHttpServerOnMac.svg?branch=master)](https://travis-ci.org/ankithbti/newHttpServerOnMac.svg)
