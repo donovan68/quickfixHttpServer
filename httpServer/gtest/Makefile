@@ -26,6 +26,7 @@ LIBS = \
     	-lboost_thread-mt \
 	-lboost_system-mt \
 	-L../lib -lAdd \
+        -lgtest \
         -lgtest_main \
 	-lpthread
 
