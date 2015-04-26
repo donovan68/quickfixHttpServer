@@ -4,3 +4,6 @@ all:
 clean:
 	(cd src; make clean)
 	(cd gtest; make clean)
+
+createlib:
+	( cd src;make createlib)
