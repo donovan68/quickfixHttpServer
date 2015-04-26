@@ -27,7 +27,7 @@ before_script:
 - pwd
 - cd httpServer
 - pwd
-- ./init.sh
+- sudo ./init.sh
 - which sh
 
 script: make createlib ; make all
