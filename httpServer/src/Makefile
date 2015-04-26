@@ -5,6 +5,7 @@
 BIN=../bin/Binary
 STATIC_LIB=../lib/libAdd.a
 SHARED_LIB=../lib/libAdd.so
+BOOST_INSTALL_ROOT=/usr/local
 
 ##ARCH = $(shell uname -m)	# ARCH becomes the output from the uname -m command.
 CXX=/usr/bin/g++
