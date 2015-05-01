@@ -21,7 +21,7 @@ INCS = -I../include \
        -I$(BOOST_BASE)/include \
 
 LIBS = \
-        -L${BOOST_BASE}/lib -lboost_thread.dylib \
+        -L${BOOST_BASE}/lib -lboost_thread \
         -L${BOOST_BASE}/lib -lboost_system \
 	-lpthread
 	

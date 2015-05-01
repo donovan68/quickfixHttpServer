@@ -1,9 +1,9 @@
 all:
-	(cd src; make all)
-	(cd gtest; make all)
+	(cd src; make -f Makefile_travis all)
+	(cd gtest; make -f Makefile_travis all)
 clean:
-	(cd src; make clean)
-	(cd gtest; make clean)
+	(cd src; make -f Makefile_travis clean)
+	(cd gtest; make -f Makefile_travis clean)
 
 createlib:
-	( cd src;make createlib)
+	( cd src;make -f Makefile_travis createlib)

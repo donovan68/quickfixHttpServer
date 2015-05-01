@@ -20,15 +20,15 @@ class HttpClientConnManager : private boost::noncopyable
 {
 public:
     typedef boost::shared_ptr<HttpClientConnManager> SmartPtr;
-    typedef std::set<HttpClientConnection::ConstSmartPtr> ClientConnections;
+    typedef std::set<HttpClientConnection::SmartPtr> ClientConnections;
 private:
 
     ClientConnections _clientConnections;
 
 public:
 
-    void start(HttpClientConnection::ConstSmartPtr clientConn);
-    void stop(HttpClientConnection::ConstSmartPtr clientConn);
+    void start(HttpClientConnection::SmartPtr clientConn);
+    void stop(HttpClientConnection::SmartPtr clientConn);
     void stopAll();
 
 };
