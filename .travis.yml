@@ -3,7 +3,7 @@
 #
 # Travis CI script for the Brackets coding puzzle
 #
-# @author Emil Maskovsky
+# @author Ankit Gupta
 #
 language: cpp
 compiler:
@@ -30,7 +30,7 @@ before_script:
 - which sh
 - sudo /bin/bash init.sh
 
-script: make createlib ; make all
+script: make -f Makefile_travis createlib ; make -f Makefile_travis all
 
 branches:
 only:
