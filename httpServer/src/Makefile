@@ -12,7 +12,7 @@ CXX=/usr/bin/g++
 CXXFLAGS=-g -O2 -Wall $(INCS)
 
 SRCS = Add.cpp
-MAIN_SRC = Main.cpp HttpServer.cpp HttpClientConnManager.cpp HttpClientConnection.cpp
+MAIN_SRC = Main.cpp HttpServer.cpp HttpClientConnManager.cpp HttpClientConnection.cpp HttpHeader.cpp HttpRequest.cpp
 
 OBJS = $(patsubst %.cpp, %.o, $(SRCS))
 MAIN_OBJ = $(patsubst %.cpp, %.o, $(MAIN_SRC))
