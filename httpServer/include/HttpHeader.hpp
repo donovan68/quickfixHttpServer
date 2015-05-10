@@ -20,7 +20,6 @@ public:
     typedef boost::shared_ptr<HttpHeader> SmartPtr;
     typedef boost::shared_ptr<const HttpHeader> ConstSmartPtr;
     
-private:
     std::string _name;
     std::string _value;
     

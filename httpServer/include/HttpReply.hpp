@@ -18,6 +18,9 @@
 namespace httpServer
 {
 
+const char name_value_separator[] = {':', ' '};
+const char crlf[] = {'\r', '\n'};
+
 class HttpReply : private boost::noncopyable
 {
 public:
@@ -44,13 +47,13 @@ public:
         not_implemented = 501,
         bad_gateway = 502,
         service_unavailable = 503
-    } status_;
+    } _status;
 
     /// The headers to be included in the reply.
-    std::vector<HttpHeader> headers_;
+    std::vector<HttpHeader::SmartPtr> _headers;
 
     /// The content to be sent in the reply.
-    std::string content_;
+    std::string _content;
 
     /// Convert the reply into a vector of buffers. The buffers do not own the
     /// underlying memory blocks, therefore the reply object must remain valid and
@@ -58,7 +61,7 @@ public:
     std::vector<boost::asio::const_buffer> to_buffers();
 
     /// Get a stock reply.
-    static HttpReply stock_reply(status_type status);
+    static HttpReply::SmartPtr stock_reply(status_type status);
 
 
 };

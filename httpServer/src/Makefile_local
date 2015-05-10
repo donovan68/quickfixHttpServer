@@ -36,7 +36,7 @@ $(STATIC_LIB): $(OBJS)
 $(SHARED_LIB): $(OBJS)
 	$(CXX) -shared $^ -o $@
 
-all: $(BIN) run
+all: $(BIN)
 
 createlib: $(STATIC_LIB) $(SHARED_LIB)
 	

@@ -20,15 +20,14 @@ public:
     boost::shared_ptr<HttpRequest> SmartPtr;
     boost::shared_ptr<const HttpRequest> ConstSmartPtr;
     
-private:
+public:
     
     std::string _method;
     std::string _uri;
     int _httpMajorVersion;
     int _httpMinorVersion;
-    std::vector<HttpHeader> _headers;
+    std::vector<HttpHeader::SmartPtr> _headers;
     
-public:
     HttpRequest();
     
     

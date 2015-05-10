@@ -13,8 +13,13 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/asio.hpp>
 
+#include <HttpReply.hpp>
+#include <HttpRequest.hpp>
+#include <HttpReqParser.hpp>
+
 namespace httpServer
 {
+
 class HttpClientConnManager;
 
 class HttpClientConnection : private boost::noncopyable, public boost::enable_shared_from_this<HttpClientConnection>
@@ -27,15 +32,22 @@ private:
     SocketSmartPtr _socket;
     boost::array<char, 8192> _buffer;
     std::string _clientId;
-    
+
     boost::shared_ptr<HttpClientConnManager> _clientManager;
     //HttpReqHandler::SmartPtr _reqHandler;
+    HttpReqParser _reqParser;
+    HttpRequest _request;
+    HttpReply::SmartPtr _reply;
 
     /// Perform an asynchronous read operation.
     void do_read();
+    
+    void asyncRead(boost::system::error_code ec, std::size_t bytes_transferred);
 
     /// Perform an asynchronous write operation.
     void do_write();
+    
+    void asyncWrite(boost::system::error_code ec, std::size_t bytes_transferred);
 public:
 
     HttpClientConnection(SocketSmartPtr socket, boost::shared_ptr<HttpClientConnManager> manager/*, HttpReqHandler::Ptr reqHanlder*/);

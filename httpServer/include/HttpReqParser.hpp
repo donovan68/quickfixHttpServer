@@ -54,7 +54,7 @@ private:
         header_value,
         expecting_newline_2,
         expecting_newline_3
-    } state_;
+    } _state;
 
     /// Handle the next character of input.
     result_type consume(HttpRequest& req, char input);
