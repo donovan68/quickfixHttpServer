@@ -1,5 +1,6 @@
 #include <HttpReply.hpp>
 #include <iostream>
+#include <boost/lexical_cast.hpp>
 
 namespace httpServer
 {
@@ -237,7 +238,7 @@ HttpReply::SmartPtr HttpReply::stock_reply(status_type status)
     rep->_headers[0] = HttpHeader::SmartPtr(new HttpHeader());
     rep->_headers[1] = HttpHeader::SmartPtr(new HttpHeader());
     rep->_headers[0]->_name = "Content-Length";
-    rep->_headers[0]->_value = std::to_string(rep->_content.size());
+    rep->_headers[0]->_value = boost::lexical_cast<std::string>(rep->_content.size());
     rep->_headers[1]->_name = "Content-Type";
     rep->_headers[1]->_value = "text/html";
     return rep;
