@@ -8,7 +8,10 @@ namespace httpServer
 
 HttpClientConnection::HttpClientConnection(SocketSmartPtr socket, boost::shared_ptr<HttpClientConnManager> manager) :
 _socket(socket),
-_clientManager(manager)
+_clientManager(manager),
+_request(new HttpRequest()),
+_reply(new HttpReply()),
+_reqHandler(new DummyHttpReqHandler("/Users/ankithbti/Development/Cpp/httpServer"))
 {
 
 }
@@ -27,21 +30,19 @@ void HttpClientConnection::asyncRead(boost::system::error_code ec, std::size_t b
         boost::tie(result, boost::tuples::ignore) = _reqParser.parse(
                                                                      _request, _buffer.data(), _buffer.data() + bytes_transferred);
 
-        std::cout << " Bytes Read: " << bytes_transferred << std::endl ;
+        //std::cout << " Bytes Read: " << bytes_transferred << std::endl ;
         if (result == HttpReqParser::good)
         {
             // Handle the req_ - whatever in the URL asked from user
-            //_reqHandler->handle_request(req_, reply_);
+            _reqHandler->handleRequest(_request, _reply);
             //do_write();
-            _reply = HttpReply::stock_reply(HttpReply::ok);
-            if(_reply){
-                std::cout << " Content comes: " << _reply->_content << std::endl ;
-            }
+            //_reply = HttpReply::stock_reply(HttpReply::ok);
             do_write();
+
         }
         else if (result == HttpReqParser::bad)
         {
-            _reply = HttpReply::stock_reply(HttpReply::bad_request);
+            HttpReply::stock_reply(HttpReply::bad_request, _reply);
             do_write();
         }
         else
@@ -52,7 +53,7 @@ void HttpClientConnection::asyncRead(boost::system::error_code ec, std::size_t b
     }
     else if (ec != boost::asio::error::operation_aborted)
     {
-        std::cout << " Error Message " << ec.message() << std::endl;
+        //std::cout << " Error Message " << ec.message() << std::endl;
         _clientManager->stop(shared_from_this());
     }
     else
@@ -73,7 +74,7 @@ void HttpClientConnection::asyncWrite(boost::system::error_code ec, std::size_t 
         // Initiate graceful connection closure.
         boost::system::error_code ignored_ec;
         _socket->shutdown(boost::asio::ip::tcp::socket::shutdown_both,
-                         ignored_ec);
+                          ignored_ec);
     }
 
     if (ec != boost::asio::error::operation_aborted)

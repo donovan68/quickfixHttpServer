@@ -13,7 +13,7 @@ bool HttpReqParser::is_char(int c)
     return c >= 0 && c <= 127;
 }
 
-HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
+HttpReqParser::result_type HttpReqParser::consume(HttpRequest::SmartPtr req, char input)
 {
     switch (_state)
     {
@@ -25,7 +25,7 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
         else
         {
             _state = method;
-            req._method.push_back(input);
+            req->_method.push_back(input);
             return indeterminate;
         }
         break;
@@ -41,7 +41,7 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
         }
         else
         {
-            req._method.push_back(input);
+            req->_method.push_back(input);
             return indeterminate;
         }
         break;
@@ -57,7 +57,7 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
         }
         else
         {
-            req._uri.push_back(input);
+            req->_uri.push_back(input);
             return indeterminate;
         }
         break;
@@ -108,8 +108,8 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
     case http_version_slash:
         if (input == '/')
         {
-            req._httpMajorVersion = 0;
-            req._httpMinorVersion = 0;
+            req->_httpMajorVersion = 0;
+            req->_httpMinorVersion = 0;
             _state = http_version_major_start;
             return indeterminate;
         }
@@ -121,7 +121,7 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
     case http_version_major_start:
         if (is_digit(input))
         {
-            req._httpMajorVersion = req._httpMajorVersion * 10 + input - '0';
+            req->_httpMajorVersion = req->_httpMajorVersion * 10 + input - '0';
             _state = http_version_major;
             return indeterminate;
         }
@@ -138,7 +138,7 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
         }
         else if (is_digit(input))
         {
-            req._httpMajorVersion = req._httpMajorVersion * 10 + input - '0';
+            req->_httpMajorVersion = req->_httpMajorVersion * 10 + input - '0';
             return indeterminate;
         }
         else
@@ -149,7 +149,7 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
     case http_version_minor_start:
         if (is_digit(input))
         {
-            req._httpMinorVersion = req._httpMinorVersion * 10 + input - '0';
+            req->_httpMinorVersion = req->_httpMinorVersion * 10 + input - '0';
             _state = http_version_minor;
             return indeterminate;
         }
@@ -166,7 +166,7 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
         }
         else if (is_digit(input))
         {
-            req._httpMinorVersion = req._httpMinorVersion * 10 + input - '0';
+            req->_httpMinorVersion = req->_httpMinorVersion * 10 + input - '0';
             return indeterminate;
         }
         else
@@ -191,7 +191,7 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
             _state = expecting_newline_3;
             return indeterminate;
         }
-        else if (!req._headers.empty() && (input == ' ' || input == '\t'))
+        else if (!req->_headers.empty() && (input == ' ' || input == '\t'))
         {
             _state = header_lws;
             return indeterminate;
@@ -202,8 +202,8 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
         }
         else
         {
-            req._headers.push_back(HttpHeader::SmartPtr(new HttpHeader()));
-            req._headers.back()->_name.push_back(input);
+            req->_headers.push_back(HttpHeader::SmartPtr(new HttpHeader()));
+            req->_headers.back()->_name.push_back(input);
             _state = header_name;
             return indeterminate;
         }
@@ -225,7 +225,7 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
         else
         {
             _state = header_value;
-            req._headers.back()->_value.push_back(input);
+            req->_headers.back()->_value.push_back(input);
             return indeterminate;
         }
         break;
@@ -241,7 +241,7 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
         }
         else
         {
-            req._headers.back()->_name.push_back(input);
+            req->_headers.back()->_name.push_back(input);
             return indeterminate;
         }
         break;
@@ -268,7 +268,7 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest& req, char input)
         }
         else
         {
-            req._headers.back()->_value.push_back(input);
+            req->_headers.back()->_value.push_back(input);
             return indeterminate;
         }
         break;

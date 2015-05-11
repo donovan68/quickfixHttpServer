@@ -57,7 +57,7 @@ private:
     } _state;
 
     /// Handle the next character of input.
-    result_type consume(HttpRequest& req, char input);
+    result_type consume(HttpRequest::SmartPtr req, char input);
 
     /// Check if a byte is an HTTP character.
     static bool is_char(int c);
@@ -77,7 +77,7 @@ public:
     void reset();
 
     template <typename InputIterator>
-    boost::tuple<result_type, InputIterator> parse(HttpRequest& req,
+    boost::tuple<result_type, InputIterator> parse(HttpRequest::SmartPtr req,
                                                  InputIterator begin, InputIterator end)
     {
         while (begin != end)

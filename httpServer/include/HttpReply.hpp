@@ -61,7 +61,7 @@ public:
     std::vector<boost::asio::const_buffer> to_buffers();
 
     /// Get a stock reply.
-    static HttpReply::SmartPtr stock_reply(status_type status);
+    static void stock_reply(status_type status, HttpReply::SmartPtr);
 
 
 };

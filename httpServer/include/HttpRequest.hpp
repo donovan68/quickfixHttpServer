@@ -17,8 +17,8 @@ namespace httpServer {
 
 class HttpRequest : private boost::noncopyable {
 public:
-    boost::shared_ptr<HttpRequest> SmartPtr;
-    boost::shared_ptr<const HttpRequest> ConstSmartPtr;
+    typedef boost::shared_ptr<HttpRequest> SmartPtr;
+    typedef boost::shared_ptr<const HttpRequest> ConstSmartPtr;
     
 public:
     

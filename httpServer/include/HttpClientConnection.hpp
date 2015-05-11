@@ -16,6 +16,7 @@
 #include <HttpReply.hpp>
 #include <HttpRequest.hpp>
 #include <HttpReqParser.hpp>
+#include <DummyHttpReqHandler.hpp>
 
 namespace httpServer
 {
@@ -34,11 +35,13 @@ private:
     std::string _clientId;
 
     boost::shared_ptr<HttpClientConnManager> _clientManager;
-    //HttpReqHandler::SmartPtr _reqHandler;
+    
     HttpReqParser _reqParser;
-    HttpRequest _request;
+    HttpRequest::SmartPtr _request;
     HttpReply::SmartPtr _reply;
 
+    HttpReqHandlerInterface::SmartPtr _reqHandler;
+    
     /// Perform an asynchronous read operation.
     void do_read();
     

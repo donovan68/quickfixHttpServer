@@ -228,9 +228,8 @@ std::string to_string(HttpReply::status_type status)
 
 } // namespace stock_replies
 
-HttpReply::SmartPtr HttpReply::stock_reply(status_type status)
+void HttpReply::stock_reply(status_type status, HttpReply::SmartPtr rep)
 {
-    HttpReply::SmartPtr rep(new HttpReply());
     rep->_status = status;
     rep->_content = stock_replies::to_string(status);
     std::cout << " Content: " << rep->_content << std::endl;
@@ -241,7 +240,6 @@ HttpReply::SmartPtr HttpReply::stock_reply(status_type status)
     rep->_headers[0]->_value = boost::lexical_cast<std::string>(rep->_content.size());
     rep->_headers[1]->_name = "Content-Type";
     rep->_headers[1]->_value = "text/html";
-    return rep;
 }
 
 
