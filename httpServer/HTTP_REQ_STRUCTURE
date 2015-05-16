@@ -9,4 +9,7 @@ p=v
 
 
 // Curl Command
-curl -H "Content-Type: application/json" -X POST
+curl -H "Content-Type: application/json" -X POST @<json_file> URL
+
+// Curl for multi-part form data upload
+curl -v -include --form key1=value1 --form upload=@localfilename URL
