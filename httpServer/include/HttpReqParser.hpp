@@ -14,6 +14,7 @@
 
 #include <HttpRequest.hpp>
 
+#include <iostream>
 namespace httpServer
 {
 
@@ -34,9 +35,9 @@ private:
 
     enum state
     {
-        method_start,
-        method,
-        uri,
+        method_start =0,
+        method =1,
+        uri=2,
         http_version_h,
         http_version_t_1,
         http_version_t_2,
@@ -53,7 +54,10 @@ private:
         space_before_header_value,
         header_value,
         expecting_newline_2,
-        expecting_newline_3
+        expecting_newline_3 = 19,
+        content_start =20,
+        read_content=21,
+        end =22
     } _state;
 
     /// Handle the next character of input.
@@ -70,6 +74,8 @@ private:
 
     /// Check if a byte is a digit.
     static bool is_digit(int c);
+    
+    int _contentLength;
 
 public:
 
@@ -83,8 +89,14 @@ public:
         while (begin != end)
         {
             result_type result = consume(req, *begin++);
-            if (result == good || result == bad)
+            
+            if (result == good || result == bad){
+                //std::cout << " buffer: " << begin << std::endl;
                 return boost::make_tuple(result, begin);
+            }else{
+                //std::cout << " Incomplete at buffer: " << begin << std::endl;
+            }
+                
         }
         return boost::make_tuple(indeterminate, begin);
     }

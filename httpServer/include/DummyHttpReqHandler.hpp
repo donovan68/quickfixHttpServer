@@ -28,7 +28,8 @@ public:
     
     virtual void handleGetRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep);
     virtual void handlePostRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep);
-
+    virtual void handlePutRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep);
+    virtual void handleDeleteRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep);
 
 };
 

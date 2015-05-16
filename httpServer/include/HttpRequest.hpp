@@ -27,6 +27,7 @@ public:
     int _httpMajorVersion;
     int _httpMinorVersion;
     std::vector<HttpHeader::SmartPtr> _headers;
+    std::string _PostData;
     
     HttpRequest();
     

@@ -20,6 +20,10 @@ HttpReqHandlerInterface::HttpReqHandlerInterface(const std::string& docRoot) : _
     mimemaps[4].mime_type = "image/png";
     mimemaps[5].extension = "ico";
     mimemaps[5].mime_type = "image/x-icon";
+    mimemaps[6].extension = "xml";
+    mimemaps[6].mime_type = "text/xml";
+    mimemaps[7].extension = "json";
+    mimemaps[7].mime_type = "application/json";
 }
 
 void HttpReqHandlerInterface::handleRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep)
@@ -43,12 +47,21 @@ void HttpReqHandlerInterface::handleRequest(HttpRequest::ConstSmartPtr req, Http
     std::cout << " From ReqHandler. URI: " << req->_uri << " , Req_Path: " << request_path << " , Method: " << req->_method << std::endl ;
     //HttpReply::stock_reply(HttpReply::created, rep);
     
+    std::cout << " Params: " << req->_headers.size() << std::endl;
+    
+    BOOST_FOREACH(HttpHeader::SmartPtr header, req->_headers){
+        std::cout << " HeaderName: " << header->_name << " , Value: " << header->_value << std::endl ;
+    }
+    std::cout << " Content: " << req->_PostData << std::endl ;
+    
     if(boost::iequals(req->_method, HTTP_GET_METHOD_STRING)){
         handleGetRequest(req, rep);
-    }else if(boost::iequals(req->_method, HTTP_GET_METHOD_STRING)){
+    }else if(boost::iequals(req->_method, HTTP_POST_METHOD_STRING)){
         handlePostRequest(req, rep);
-    }else{
-        
+    }else if(boost::iequals(req->_method, HTTP_PUT_METHOD_STRING)){
+        handlePutRequest(req, rep);
+    }else if(boost::iequals(req->_method, HTTP_DELETE_METHOD_STRING)){
+        handleDeleteRequest(req, rep);
     }
 }
 

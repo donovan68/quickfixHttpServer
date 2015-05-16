@@ -11,6 +11,8 @@
 namespace httpServer {
 const std::string HTTP_GET_METHOD_STRING = "GET";
 const std::string HTTP_POST_METHOD_STRING = "POST";
+const std::string HTTP_PUT_METHOD_STRING = "PUT";
+const std::string HTTP_DELETE_METHOD_STRING = "DELETE";
 }
 
 #endif	/* CONSTANTS_HPP */

@@ -18,6 +18,8 @@
 namespace httpServer
 {
 
+class HttpClientConnection;
+
 class HttpReqHandlerInterface : private boost::noncopyable
 {
 public:
@@ -29,7 +31,7 @@ public:
     {
         const char* extension;
         const char* mime_type;
-    } mimemaps[6];
+    } mimemaps[8];
 
 protected:
 
@@ -54,6 +56,9 @@ protected:
     /// invalid.
     bool url_decode(const std::string& in, std::string& out);
 
+    /// Handle a request and produce a reply.
+    void handleRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep);
+
 public:
 
     explicit HttpReqHandlerInterface(const std::string& docRoot);
@@ -62,11 +67,12 @@ public:
         
     }
     
-    /// Handle a request and produce a reply.
-    void handleRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep);
-
     virtual void handleGetRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep) = 0;
     virtual void handlePostRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep) = 0;
+    virtual void handlePutRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep) = 0;
+    virtual void handleDeleteRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep) = 0;
+    
+    friend class HttpClientConnection;
 };
 }
 

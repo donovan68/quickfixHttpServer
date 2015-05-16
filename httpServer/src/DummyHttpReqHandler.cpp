@@ -2,8 +2,10 @@
 #include <iostream>
 
 #include <boost/lexical_cast.hpp>
+#include <boost/foreach.hpp>
 
 #include <fstream>
+#include <vector>
 
 namespace httpServer
 {
@@ -27,7 +29,7 @@ void DummyHttpReqHandler::handleGetRequest(HttpRequest::ConstSmartPtr req, HttpR
         HttpReply::stock_reply(HttpReply::bad_request, rep);
         return;
     }
-
+    
     // If path ends in slash (i.e. is a directory) then add "index.html".
     if (request_path[request_path.size() - 1] == '/')
     {
@@ -82,6 +84,16 @@ void DummyHttpReqHandler::handleGetRequest(HttpRequest::ConstSmartPtr req, HttpR
 void DummyHttpReqHandler::handlePostRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep)
 {
     std::cout << " POST REQ " << std::endl;
+}
+
+void DummyHttpReqHandler::handlePutRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep)
+{
+    std::cout << " PUT REQ " << std::endl;
+}
+
+void DummyHttpReqHandler::handleDeleteRequest(HttpRequest::ConstSmartPtr req, HttpReply::SmartPtr rep)
+{
+    std::cout << " DELETE REQ " << std::endl;
 }
 
 

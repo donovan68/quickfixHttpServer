@@ -1,9 +1,13 @@
 #include <HttpReqParser.hpp>
+#include <string>
+#include <boost/foreach.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/lexical_cast.hpp>
 
 namespace httpServer
 {
 
-HttpReqParser::HttpReqParser() : _state(method_start)
+HttpReqParser::HttpReqParser() : _state(method_start), _contentLength(0)
 {
 
 }
@@ -15,6 +19,7 @@ bool HttpReqParser::is_char(int c)
 
 HttpReqParser::result_type HttpReqParser::consume(HttpRequest::SmartPtr req, char input)
 {
+    //std::cout << " State: " << _state << std::endl;
     switch (_state)
     {
     case method_start:
@@ -284,7 +289,63 @@ HttpReqParser::result_type HttpReqParser::consume(HttpRequest::SmartPtr req, cha
         }
         break;
     case expecting_newline_3:
-        return (input == '\n') ? good : bad;
+        if (input == '\n')
+        {
+
+            BOOST_FOREACH(HttpHeader::SmartPtr header, req->_headers)
+            {
+                if (boost::iequals(header->_name, "Content-Length"))
+                {
+                    _contentLength = boost::lexical_cast<int>(header->_value);
+                }
+            }
+            if (_contentLength > 0)
+            {
+                _state = content_start;
+                return indeterminate;
+            }
+            else
+            {
+                return good;
+            }
+        }
+        else
+        {
+            return bad;
+        }
+        break;
+    case content_start:
+        //std::cout << " In Content Start: " << input << std::endl;
+        if (_contentLength > 0)
+        {
+            req->_PostData.push_back(input);
+            --_contentLength;
+        }
+        else
+        {
+            return good;
+        }
+        _state = read_content;
+        return indeterminate;
+        break;
+    case read_content:
+        //std::cout << " In read content len: " << _contentLength << " , Data: " << req->_PostData << std::endl;
+        if (_contentLength > 1)
+        {
+            req->_PostData.push_back(input);
+            --_contentLength;
+            return indeterminate;
+        }
+        else if (_contentLength > 0)
+        {
+            req->_PostData.push_back(input);
+            --_contentLength;
+            return good;
+        }
+        else
+        {
+            return good;
+        }
         break;
     default:
         return bad;
