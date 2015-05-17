@@ -26,7 +26,7 @@ void HttpClientConnection::asyncRead(boost::system::error_code ec, std::size_t b
     if (!ec)
     {
         HttpReqParser::result_type result;
-        std::cout << "Req: " << _buffer.data() << std::endl ;
+        //std::cout << "---REQ_BEGIN---< " << std::endl << _buffer.data() << std::endl << " >---REQ_END---" << std::endl;
         boost::tie(result, boost::tuples::ignore) = _reqParser.parse(
                                                                      _request, _buffer.data(), _buffer.data() + bytes_transferred);
 

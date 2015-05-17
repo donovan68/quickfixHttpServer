@@ -44,15 +44,15 @@ void HttpReqHandlerInterface::handleRequest(HttpRequest::ConstSmartPtr req, Http
         return;
     }
     
-    std::cout << " From ReqHandler. URI: " << req->_uri << " , Req_Path: " << request_path << " , Method: " << req->_method << std::endl ;
+    //std::cout << " From ReqHandler. URI: " << req->_uri << " , Req_Path: " << request_path << " , Method: " << req->_method << std::endl ;
     //HttpReply::stock_reply(HttpReply::created, rep);
     
-    std::cout << " Params: " << req->_headers.size() << std::endl;
+    //std::cout << " Params: " << req->_headers.size() << std::endl;
     
-    BOOST_FOREACH(HttpHeader::SmartPtr header, req->_headers){
-        std::cout << " HeaderName: " << header->_name << " , Value: " << header->_value << std::endl ;
-    }
-    std::cout << " Content: " << req->_PostData << std::endl ;
+//    BOOST_FOREACH(HttpHeader::SmartPtr header, req->_headers){
+//        std::cout << " HeaderName: " << header->_name << " , Value: " << header->_value << std::endl ;
+//    }
+//    std::cout << " Content: " << req->_PostData << std::endl ;
     
     if(boost::iequals(req->_method, HTTP_GET_METHOD_STRING)){
         handleGetRequest(req, rep);
