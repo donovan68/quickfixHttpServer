@@ -5,6 +5,7 @@
 BIN=../bin/TestBinary
 GTEST_BASE = ${GTEST_ROOT}
 GMOCK_BASE = ${GMOCK_ROOT}
+MYSQL_API_ROOT=/Users/ankithbti/Development/Cpp/mysqlapi
 
 ##ARCH = $(shell uname -m)	# ARCH becomes the output from the uname -m command.
 CXX=/usr/bin/g++
@@ -16,6 +17,8 @@ OBJS = $(patsubst %.cpp, %.o, $(SRCS))
 
 INCS = -I../include \
        -I$(BOOST_INSTALL_ROOT)/include \
+       -I/usr/local/mysql/include \
+       -I${MYSQL_API_ROOT}/include \
 
 LIBS = \
     	-L${BOOST_INSTALL_ROOT}/lib -lboost_thread \
@@ -23,6 +26,7 @@ LIBS = \
 	../lib/libAdd.a \
         ${GMOCK_ROOT}/gtest/make/gtest.a \
         ${GMOCK_ROOT}/make/gmock.a \
+	-L${MYSQL_API_ROOT}/lib -lmysqlpp \
 	-lpthread
 
 $(BIN): $(OBJS)
