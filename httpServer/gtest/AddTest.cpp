@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <mysql++/mysql++.h>
+//#include <mysql++/mysql++.h>
 #include <iostream>
 
 TEST(AddTest, Positive){
@@ -18,10 +18,10 @@ TEST(AddTest, mysqlTest){
 //            std::cout << " Query result : " << res[i]["name"] <<  " Rows: " << res[i]["age"] << std::endl;
 //        }
         
-    }catch(const mysqlpp::BadQuery& err){
-        std::cout << " BadQuery Exception - " << err.what() << std::endl;
-    }catch(const mysqlpp::BadConversion& err){
-        std::cout << " BadConversion Exception - " << err.what() << std::endl;
+//    }catch(const mysqlpp::BadQuery& err){
+//        std::cout << " BadQuery Exception - " << err.what() << std::endl;
+//    }catch(const mysqlpp::BadConversion& err){
+//        std::cout << " BadConversion Exception - " << err.what() << std::endl;
     }catch(const std::exception& err){
         std::cout << " Exception - " << err.what() << std::endl;
     }
