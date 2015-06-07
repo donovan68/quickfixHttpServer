@@ -8,13 +8,13 @@
 namespace httpServer
 {
 
-HttpServer::HttpServer(const std::string& port, const std::string& docRoot) : _serverPort(port),
-_docRoot(docRoot),
+HttpServer::HttpServer(const std::string& port, HttpReqHandlerInterface::SmartPtr reqHandler) : _serverPort(port),
 _ioService(),
 _acceptor(_ioService),
 _socket(new boost::asio::ip::tcp::socket(_ioService)),
 _isAlive(false),
-_clientManager(new HttpClientConnManager())
+_clientManager(new HttpClientConnManager()),
+_reqHandler(reqHandler)
 {
     // Open the acceptor with the option to reuse the address (i.e. SO_REUSEADDR).
     boost::asio::ip::tcp::resolver resolver(_ioService);
@@ -46,7 +46,7 @@ void HttpServer::asyncAccept(boost::system::error_code ec)
     {
         // Create new HttpClientConnection using the above socket
         std::cout << " New Client connection created. " << std::endl;
-        HttpClientConnection::SmartPtr clientConn(new HttpClientConnection(_socket, _clientManager /* ,reqHandler_*/));
+        HttpClientConnection::SmartPtr clientConn(new HttpClientConnection(_socket, _clientManager , _reqHandler));
         _clientManager->start(clientConn);
         _socket = boost::shared_ptr<boost::asio::ip::tcp::socket>(new boost::asio::ip::tcp::socket(_ioService));
 

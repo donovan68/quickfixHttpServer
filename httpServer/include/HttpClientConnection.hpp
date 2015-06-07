@@ -16,7 +16,7 @@
 #include <HttpReply.hpp>
 #include <HttpRequest.hpp>
 #include <HttpReqParser.hpp>
-#include <DummyHttpReqHandler.hpp>
+#include <HttpReqHandlerInterface.hpp>
 
 namespace httpServer
 {
@@ -53,7 +53,7 @@ private:
     void asyncWrite(boost::system::error_code ec, std::size_t bytes_transferred);
 public:
 
-    HttpClientConnection(SocketSmartPtr socket, boost::shared_ptr<HttpClientConnManager> manager/*, HttpReqHandler::Ptr reqHanlder*/);
+    HttpClientConnection(SocketSmartPtr socket, boost::shared_ptr<HttpClientConnManager> manager, HttpReqHandlerInterface::SmartPtr reqHanlder);
 
     void start();
     void stop();

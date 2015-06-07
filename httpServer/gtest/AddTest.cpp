@@ -1,8 +1,11 @@
 #include <gtest/gtest.h>
+#include <Add.hpp>
 //#include <mysql++/mysql++.h>
 #include <iostream>
 
 TEST(AddTest, Positive){
+    Add a;
+    EXPECT_EQ(3,a.add(1,2));
     EXPECT_EQ(1,1);
 }
 

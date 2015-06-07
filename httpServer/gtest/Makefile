@@ -25,7 +25,7 @@ $(GTEST_LIB): $(GTEST_OBJ)
 LIBS = \
     	-lboost_thread-mt \
 	-lboost_system-mt \
-	-L../lib -lAdd \
+	-L../lib -lHttpServer \
         -lgtest \
         -lgtest_main \
 	-lpthread

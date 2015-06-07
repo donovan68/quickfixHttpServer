@@ -6,12 +6,12 @@
 namespace httpServer
 {
 
-HttpClientConnection::HttpClientConnection(SocketSmartPtr socket, boost::shared_ptr<HttpClientConnManager> manager) :
+HttpClientConnection::HttpClientConnection(SocketSmartPtr socket, boost::shared_ptr<HttpClientConnManager> manager, HttpReqHandlerInterface::SmartPtr reqHandler) :
 _socket(socket),
 _clientManager(manager),
 _request(new HttpRequest()),
 _reply(new HttpReply()),
-_reqHandler(new DummyHttpReqHandler("/Users/ankithbti/Development/Cpp/httpServer"))
+_reqHandler(reqHandler)
 {
 
 }
