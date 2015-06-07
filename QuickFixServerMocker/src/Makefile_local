@@ -1,0 +1,46 @@
+###############
+## Makefile
+###############
+
+BIN=../bin/Binary
+BOOST_BASE=${BOOST_INSTALL_ROOT}
+HTTP_SERVER_BASE=/Users/ankithbti/Development/Cpp/httpServer
+
+ARCH = $(shell uname -m)	# ARCH becomes the output from the uname -m command.
+CXX=/usr/bin/g++
+CXXFLAGS=-fPIC -g -O2 -arch $(ARCH) $(INCS) 
+
+SRCS = QuickFixHttpServer.cpp Application.cpp
+MAIN_SRC = Main.cpp
+
+OBJS = $(patsubst %.cpp, %.o, $(SRCS))
+MAIN_OBJ = $(patsubst %.cpp, %.o, $(MAIN_SRC))
+
+INCS = -I../include \
+       -I$(BOOST_BASE)/include \
+       -I/Users/ankithbti/Development/Cpp/quickfix/include \
+       -I$(HTTP_SERVER_BASE)/include \
+
+LIBS = \
+        -L${BOOST_BASE}/lib -lboost_thread \
+        -L${BOOST_BASE}/lib -lboost_system \
+	-L/Users/ankithbti/Development/Cpp/quickfix/lib -lquickfix \
+	-L$(HTTP_SERVER_BASE)/lib -lHttpServer \
+	-lpthread
+	
+$(BIN): $(OBJS) $(MAIN_OBJ)
+	$(CXX) $(OBJS) $(MAIN_OBJ) -o $(BIN) $(LIBS)
+
+all: $(BIN)
+
+createlib: $(STATIC_LIB) $(SHARED_LIB)
+	
+run:
+	@echo "----------------------------"
+	@echo "Running the programme. "
+	@echo "----------------------------"
+	$(BIN)
+	@echo "----------------------------"
+
+clean:
+	rm -rf $(BIN) *.o
