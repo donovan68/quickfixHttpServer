@@ -1,5 +1,6 @@
 Build Status
-> [![Build Status](https://travis-ci.org/ankithbti/newHttpServerOnMac.png?branch=master)](https://travis-ci.org/ankithbti/newHttpServerOnMac)
+> [![Build Status](https://travis-ci.org/ankithbti/newHttpServerOnMac.png?branch=master)](https://travis-ci.org/ankithbti/newHttpServerOnMac)  
+
 The Financial Information Exchange (FIX) protocol is an industry supported message standard addressing the specific needs of parties conducting electronic securities transactions. QuickFIX/C++ is an open source FIX engine developed in the C++ programming language. This class provides C++ developers with an introduction to the FIX protocol and quickly moves into a thorough discussion and hands-on experience with the QuickFIX/C++ engine’s implementation and use.
 Objectives
 
